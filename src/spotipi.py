@@ -1,3 +1,4 @@
+import os
 import time
 from io import BytesIO
 import configparser
@@ -44,8 +45,10 @@ def main(config):
 
 
 def parse_config():
+    config_file = os.path.join(os.path.dirname(__file__), '../config.ini')
+
     config = configparser.ConfigParser()
-    config.read("../config.ini")
+    config.read(config_file)
 
     return config
 
