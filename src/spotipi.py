@@ -1,7 +1,7 @@
 import time
 from io import BytesIO
 import configparser
-import traceback
+import logging
 
 import requests
 from PIL import Image
@@ -12,7 +12,9 @@ from src.spotify_service import SpotifyService
 def fetch_image(url, config):
     response = requests.get(url)
     image = Image.open(BytesIO(response.content))
-    image.thumbnail((int(config["MATRIX"]["Width"]), int(config["MATRIX"]["Height"])), Image.Resampling.LANCZOS)
+
+    dimensions = (int(config["MATRIX"]["Width"]), int(config["MATRIX"]["Height"]))
+    image.thumbnail(dimensions, Image.Resampling.LANCZOS)
 
     return image.convert("RGB")
 
@@ -34,8 +36,8 @@ def main(config):
 
                 image = fetch_image(curr_cover_art_url, config)
                 display_image(image)
-        except Exception:
-            print(traceback.format_exc())
+        except Exception as e:
+            logging.exception(e)
         finally:
             time.sleep(int(config["GENERAL"]["DelaySeconds"]))
 
