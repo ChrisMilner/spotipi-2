@@ -6,7 +6,7 @@ import logging
 import requests
 from PIL import Image
 
-from src.spotify_service import SpotifyService
+from spotify_service import SpotifyService
 
 
 def fetch_image(url, config):
