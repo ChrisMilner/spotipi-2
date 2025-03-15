@@ -7,7 +7,7 @@ SCOPE = "user-read-currently-playing"
 
 class SpotifyService:
     def __init__(self, config):
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
         auth_manager = spotipy.SpotifyOAuth(
             username=config["SPOTIPY"]["Username"],

@@ -20,6 +20,7 @@ def fetch_image(url, config):
 
 
 def display_image(image):
+    # TODO: Actually display on the matrix
     image.show()
 
 
@@ -50,4 +51,6 @@ def parse_config():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+
     main(parse_config())
