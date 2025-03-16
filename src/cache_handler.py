@@ -33,6 +33,8 @@ class CustomCacheHandler(CacheHandler):
 
         if not os.path.exists(self.cache_file):
             self.logger.warning("Cache file doesn't exist")
+            self.logger.info("Creating cache file...")
+            os.mknod(self.cache_file)
             return
 
         with open(self.cache_file, "r") as f:
