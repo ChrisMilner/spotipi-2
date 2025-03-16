@@ -2,8 +2,9 @@
 /venv
 *.iml
 
-cache/
+.cache/
 .cache*
+__pycache__/
 config.ini
 rgb-matrix.sh
 /rpi-rgb-led-matrix

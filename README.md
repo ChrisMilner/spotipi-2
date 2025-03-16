@@ -13,7 +13,7 @@ cd spotipi-2
 
 ./setup.sh
 ```
-You'll be prompted for some information about your LED Matrix, and then will need to restart.
+You'll be prompted for some information about your LED Matrix setup, and then will need to restart.
 
 ```shell
 cp config-template.ini config.ini
@@ -22,7 +22,7 @@ cp config-template.ini config.ini
 Now you need to edit `config.ini` to include the missing Spotipy variables
 
 ```shell
-python3 src/spotipi.py
+sudo python3 src/spotipi.py
 ```
 
 You will be given a link, open it and login through Spotify (if you are not already logged in).
