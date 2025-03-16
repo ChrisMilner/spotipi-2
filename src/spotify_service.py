@@ -1,3 +1,4 @@
+import os
 import logging
 
 import spotipy
@@ -9,13 +10,15 @@ class SpotifyService:
     def __init__(self, config):
         self.logger = logging.getLogger(self.__class__.__name__)
 
+        cache_path = os.path.join(os.path.dirname(__file__), "../.cache/.cache")
+
         auth_manager = spotipy.SpotifyOAuth(
             username=config["SPOTIPY"]["Username"],
             scope=SCOPE,
             client_id=config["SPOTIPY"]["ClientId"],
             client_secret=config["SPOTIPY"]["ClientSecret"],
             redirect_uri=config["SPOTIPY"]["RedirectURI"],
-            cache_path='/root/.cache',
+            cache_path=cache_path,
             open_browser=False
         )
 
