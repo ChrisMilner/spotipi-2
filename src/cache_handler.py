@@ -11,7 +11,7 @@ class CustomCacheHandler(CacheHandler):
         if not os.path.exists(path):
             os.makedirs(path)
 
-        os.chmod(path, 0o666)  # rw-rw-rw-
+        os.chmod(path, 0o766)  # rw-rw-rw-
 
         self.cache_file = path + "cache.txt"
 
