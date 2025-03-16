@@ -13,7 +13,7 @@ In order to run Spotipi you need to have an Application set up in the [Developer
 
 1. Navigate to the link above and click "Create app"
 2. Give your app a name and description, and add a redirect URI: `http://127.0.0.1/callback` (or anything you want - it shouldn't matter)
-3. Agree to the T&C and click "Save"  
+3. Agree to the T&Cs and click "Save"  
 
 ### Pi Setup
 
@@ -52,3 +52,37 @@ If you want the Pi to run Spotipi constantly in the background then you should i
 ```shell
 sudo ./install_service.sh
 ```
+
+## Troubleshooting
+
+### "I installed the service but it's not working"
+
+Firstly, make sure that you've run Spotipi via the Python command successfully at least once.
+This is required as you need to manually authenticate with Spotify. 
+
+If you've done that, then you can view the service's logs by running:
+
+```shell
+journalctl -u spotipi2 -n 50
+```
+
+This will show you the `50` most recent log lines output by the Spotipi2 service.
+
+### "How do I stop the service?"
+
+You can stop/start the service with:
+
+```shell
+systemctl stop/start spotipi2
+```
+
+### "The service shows an error about `input`/`raw_input`"
+
+This occurs when it can't read the Spotipy token cache file.
+Either because it doesn't exist or it doesn't have permission.
+Check that there is a file `spotipi-2/src/.cache` and that it is not empty
+* If it doesn't exist or is empty, then you need to manually run the `sudo python3 src/spotipi.py` to set the token.
+* If it does exist then most likely the service is unable to read it. You should check the permissions on that file.
+
+I have tested this on my own Pi 2 Model B, but not on any other configurations.
+Feel free to raise issues or PRs if you find bugs/improvements.
