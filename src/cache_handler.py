@@ -18,6 +18,8 @@ class CustomCacheHandler(CacheHandler):
 
         self.cache_file = path + "cache.txt"
 
+        os.mknod(self.cache_file)
+
     def get_cached_token(self):
         if not os.path.exists(self.cache_file):
             self.logger.warning("Cache file doesn't exist")
