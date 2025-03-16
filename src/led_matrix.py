@@ -17,3 +17,6 @@ class LEDMatrix:
 
     def display_image(self, image):
         self.matrix.SetImage(image)
+
+    def clear(self):
+        self.matrix.Clear()

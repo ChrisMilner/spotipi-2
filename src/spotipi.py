@@ -37,8 +37,7 @@ def main(config):
                     image = fetch_image(curr_cover_art_url, config)
                     matrix.display_image(image)
                 else:
-                    # TODO: Clear display?
-                    pass
+                    matrix.clear()
         except Exception as e:
             logging.exception(e)
         finally:
