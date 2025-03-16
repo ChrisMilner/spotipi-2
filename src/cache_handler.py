@@ -1,3 +1,4 @@
+import logging
 import os
 import json
 
@@ -6,6 +7,8 @@ from spotipy import CacheHandler
 
 class CustomCacheHandler(CacheHandler):
     def __init__(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
+
         path = os.path.join(os.path.dirname(__file__), "../cache/")
 
         if not os.path.exists(path):
@@ -16,6 +19,9 @@ class CustomCacheHandler(CacheHandler):
         self.cache_file = path + "cache.txt"
 
     def get_cached_token(self):
+        if not os.path.exists(self.cache_file):
+            self.logger.warning("Cache file doesn't exist")
+
         with open(self.cache_file, "r") as f:
             return json.loads(f.read())
 
