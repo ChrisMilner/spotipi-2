@@ -1,7 +1,8 @@
-import os
 import logging
 
 import spotipy
+
+from cache_handler import CustomCacheHandler
 
 SCOPE = "user-read-currently-playing"
 
@@ -10,11 +11,7 @@ class SpotifyService:
     def __init__(self, config):
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        cache_dir = os.path.join(os.path.dirname(__file__), "../cache/")
-
-        if not os.path.exists(cache_dir):
-            os.makedirs(cache_dir)
-        os.chmod(cache_dir, 0o777)
+        cache_handler = CustomCacheHandler()
 
         auth_manager = spotipy.SpotifyOAuth(
             username=config["SPOTIPY"]["Username"],
@@ -22,7 +19,7 @@ class SpotifyService:
             client_id=config["SPOTIPY"]["ClientId"],
             client_secret=config["SPOTIPY"]["ClientSecret"],
             redirect_uri=config["SPOTIPY"]["RedirectURI"],
-            cache_path=os.path.join(cache_dir, "cache.txt"),
+            cache_handler=cache_handler,
             open_browser=False
         )
 
