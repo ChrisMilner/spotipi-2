@@ -8,6 +8,7 @@ class LEDMatrix:
         options.cols = int(config["MATRIX"]["Height"])
         options.brightness = 70
         options.limit_refresh_rate_hz = 60
+        options.drop_privileges = False
 
         self.matrix = RGBMatrix(options=options)
 
