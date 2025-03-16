@@ -7,6 +7,7 @@ import logging
 import requests
 from PIL import Image
 
+from led_matrix import LEDMatrix
 from spotify_service import SpotifyService
 
 
@@ -20,13 +21,9 @@ def fetch_image(url, config):
     return image.convert("RGB")
 
 
-def display_image(image):
-    # TODO: Actually display on the matrix
-    image.show()
-
-
 def main(config):
     spotify = SpotifyService(config)
+    matrix = LEDMatrix(config)
     curr_cover_art_url = None
 
     while True:
@@ -36,8 +33,12 @@ def main(config):
             if new_cover_art_url != curr_cover_art_url:
                 curr_cover_art_url = new_cover_art_url
 
-                image = fetch_image(curr_cover_art_url, config)
-                display_image(image)
+                if curr_cover_art_url is not None:
+                    image = fetch_image(curr_cover_art_url, config)
+                    matrix.display_image(image)
+                else:
+                    # TODO: Clear display?
+                    pass
         except Exception as e:
             logging.exception(e)
         finally:

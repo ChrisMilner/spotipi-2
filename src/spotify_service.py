@@ -14,7 +14,8 @@ class SpotifyService:
             scope=SCOPE,
             client_id=config["SPOTIPY"]["ClientId"],
             client_secret=config["SPOTIPY"]["ClientSecret"],
-            redirect_uri=config["SPOTIPY"]["RedirectURI"]
+            redirect_uri=config["SPOTIPY"]["RedirectURI"],
+            open_browser=False
         )
 
         self.spotify = spotipy.Spotify(auth_manager=auth_manager)
