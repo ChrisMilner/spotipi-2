@@ -1,7 +1,9 @@
 # Spotipi 2
 > Display Spotify cover art on your Raspberry Pi connected LED matrix display
 
-This project is inspired by and based upon [ryanwa18/spotipi](https://github.com/ryanwa18/spotipi) :pray:
+This project is inspired by, and based upon [ryanwa18/spotipi](https://github.com/ryanwa18/spotipi) :pray:
+
+It aims to simplify the original project, and make the setup process easier.
 
 ## Setup
 
