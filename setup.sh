@@ -9,4 +9,3 @@ chmod u+x rgb-matrix.sh
 
 echo "Running rgb-matrix software setup..."
 sudo ./rgb-matrix.sh
-rm rgb-matrix.sh

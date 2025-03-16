@@ -4,3 +4,5 @@
 
 .cache*
 config.ini
+rgb-matrix.sh
+/rpi-rgb-led-matrix
