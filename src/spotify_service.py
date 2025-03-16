@@ -15,6 +15,7 @@ class SpotifyService:
             client_id=config["SPOTIPY"]["ClientId"],
             client_secret=config["SPOTIPY"]["ClientSecret"],
             redirect_uri=config["SPOTIPY"]["RedirectURI"],
+            cache_path='~/.cache',
             open_browser=False
         )
 
