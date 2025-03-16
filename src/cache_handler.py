@@ -1,12 +1,14 @@
 import logging
 import os
 import json
+import getpass
 
 from spotipy import CacheHandler
 
 
 class CustomCacheHandler(CacheHandler):
     def __init__(self):
+        print("Constructor: " + getpass.getuser())
         self.logger = logging.getLogger(self.__class__.__name__)
 
         path = os.path.join(os.path.dirname(__file__), "../cache/")
@@ -22,6 +24,8 @@ class CustomCacheHandler(CacheHandler):
             os.mknod(self.cache_file)
 
     def get_cached_token(self):
+        print("Getter: " + getpass.getuser())
+
         if not os.path.exists(self.cache_file):
             self.logger.warning("Cache file doesn't exist")
             return
