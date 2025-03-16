@@ -2,7 +2,7 @@
 /venv
 *.iml
 
-.cache/
+cache/
 .cache*
 config.ini
 rgb-matrix.sh

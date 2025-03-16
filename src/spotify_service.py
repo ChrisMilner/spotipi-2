@@ -10,7 +10,7 @@ class SpotifyService:
     def __init__(self, config):
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        cache_dir = os.path.join(os.path.dirname(__file__), "../.cache/")
+        cache_dir = os.path.join(os.path.dirname(__file__), "../cache/")
 
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
