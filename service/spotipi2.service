@@ -1,0 +1,14 @@
+[Unit]
+Description=Displays Spotify cover art on RGB LED Matrix
+
+[Service]
+ExecStart=python3 install_path/src/spotipi.py &
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=spotipi2
+LimitRTPRIO=99
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
