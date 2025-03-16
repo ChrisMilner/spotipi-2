@@ -22,8 +22,8 @@ def fetch_image(url, config):
 
 
 def main(config):
-    spotify = SpotifyService(config)
     matrix = LEDMatrix(config)
+    spotify = SpotifyService(config)
     curr_cover_art_url = None
 
     while True:
