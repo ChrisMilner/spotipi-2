@@ -21,6 +21,7 @@ class CustomCacheHandler(CacheHandler):
     def get_cached_token(self):
         if not os.path.exists(self.cache_file):
             self.logger.warning("Cache file doesn't exist")
+            return
 
         with open(self.cache_file, "r") as f:
             return json.loads(f.read())
