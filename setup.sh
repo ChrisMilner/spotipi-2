@@ -3,10 +3,6 @@ set -e
 echo "Installing Python dependencies..."
 sudo python3 -m pip install -r requirements.txt --break-system-packages
 
-echo "Creating cache directory..."
-sudo mkdir .cache
-sudo chmod 777 .cache
-
 echo "Downloading rgb-matrix software setup..."
 curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/rgb-matrix.sh > rgb-matrix.sh
 chmod u+x rgb-matrix.sh
