@@ -5,7 +5,7 @@ This project is inspired by and based upon [ryanwa18/spotipi](https://github.com
 
 ## Setup
 
-# TODO: Instructions on Spotify API setup
+> TODO: Instructions on Spotify API setup
 
 ```shell
 git clone https://github.com/ChrisMilner/spotipi-2.git
@@ -32,3 +32,12 @@ You will then be redirected to a new URL, copy this new URL and paste it into th
 :tada: Spotipi should now be running :tada:
  * If you're not currently playing a song on Spotify you should see `No song playing`
  * If you are then the cover art should be displayed on your LED matrix
+
+## Installing as a service
+
+If you've completed the above steps then Spotipi should be running, however, if you restart the Pi it will stop.
+If you want the Pi to run Spotipi constantly in the background then you should install it as a service.
+
+```shell
+sudo ./install_service.sh
+```

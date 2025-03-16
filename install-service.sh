@@ -1,7 +1,7 @@
 set -e
 
 echo "Removing spotipi2 service if it exists..."
-systemctl stop spotipi2
+systemctl is-active spotipi2.service && systemctl stop spotipi2.service
 rm -rf /etc/systemd/system/spotipi2.*
 systemctl daemon-reload
 
