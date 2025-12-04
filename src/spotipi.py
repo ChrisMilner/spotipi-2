@@ -1,6 +1,7 @@
 import os
 import time
 from io import BytesIO
+from datetime import datetime
 import configparser
 import logging
 
@@ -44,13 +45,29 @@ class Spotipi:
 
         return image.convert("RGB")
 
-
     def show_binary_clock(self):
+        now = datetime.now()
+        hour_bin = '{0:06b}'.format(now.hour)
+        minute_bin = '{0:06b}'.format(now.minute)
+        second_bin = '{0:06b}'.format(now.second)
+
         frame = self.matrix.create_blank_frame()
 
-        frame.SetPixel(0,0, 255, 255, 255)
+        self.set_pixels_from_binary_string(frame, 0, 0, hour_bin)
+        self.set_pixels_from_binary_string(frame, 0, 1, minute_bin)
+        self.set_pixels_from_binary_string(frame, 0, 2, second_bin)
 
         self.matrix.display_frame(frame)
+    
+    def set_pixels_from_binary_string(self, frame, col_offset, row, binary):
+        on_colour  = (200, 200, 200)
+        off_colour = ( 50,  50,  50)
+
+        for i, c in enumerate(binary):
+            if c == '1':
+                frame.SetPixel(col_offset + i, row, *on_colour)
+            else:
+                frame.SetPixel(col_offset + i, row, *off_colour)
 
 
 def main(config):
