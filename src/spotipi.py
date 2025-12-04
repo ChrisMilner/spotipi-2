@@ -11,33 +11,54 @@ from led_matrix import LEDMatrix
 from spotify_service import SpotifyService
 
 
-def fetch_image(url, config):
-    response = requests.get(url)
-    image = Image.open(BytesIO(response.content))
+class Spotipi:
+    def __init__(self, config):
+        self.config = config
+        self.matrix = LEDMatrix(config)
+        self.spotify = SpotifyService(config)
+        
+        self.curr_cover_art_url = None
+    
+    def update_matrix(self):
+        new_cover_art_url = self.spotify.get_current_cover_art_url()
 
-    dimensions = (int(config["MATRIX"]["Width"]), int(config["MATRIX"]["Height"]))
-    image.thumbnail(dimensions, Image.Resampling.LANCZOS)
+        if new_cover_art_url != self.curr_cover_art_url:
+            self.curr_cover_art_url = new_cover_art_url
 
-    return image.convert("RGB")
+            if self.curr_cover_art_url is not None:
+                image = self.fetch_image(self.curr_cover_art_url)
+                self.matrix.display_image(image)
+            else:
+                self.matrix.clear()
+        
+        # If we're not displaying the album cover, display the clock
+        if new_cover_art_url is None:
+            self.show_binary_clock()
+
+    def fetch_image(self, url):
+        response = requests.get(url)
+        image = Image.open(BytesIO(response.content))
+
+        dimensions = (int(self.config["MATRIX"]["Width"]), int(self.config["MATRIX"]["Height"]))
+        image.thumbnail(dimensions, Image.Resampling.LANCZOS)
+
+        return image.convert("RGB")
+
+
+    def show_binary_clock(self):
+        frame = self.matrix.create_blank_frame()
+
+        frame.SetPixel(0,0, 255, 255, 255)
+
+        self.matrix.display_frame(frame)
 
 
 def main(config):
-    matrix = LEDMatrix(config)
-    spotify = SpotifyService(config)
-    curr_cover_art_url = None
+    spotipi = Spotipi(config)
 
     while True:
         try:
-            new_cover_art_url = spotify.get_current_cover_art_url()
-
-            if new_cover_art_url != curr_cover_art_url:
-                curr_cover_art_url = new_cover_art_url
-
-                if curr_cover_art_url is not None:
-                    image = fetch_image(curr_cover_art_url, config)
-                    matrix.display_image(image)
-                else:
-                    matrix.clear()
+            spotipi.update_matrix()
         except Exception as e:
             logging.exception(e)
         finally:

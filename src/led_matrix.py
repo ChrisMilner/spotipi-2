@@ -18,6 +18,12 @@ class LEDMatrix:
 
     def display_image(self, image):
         self.matrix.SetImage(image)
+    
+    def display_frame(self, frame):
+        self.matrix.SwapOnVSync(frame)
 
     def clear(self):
         self.matrix.Clear()
+
+    def create_blank_frame(self):
+        return self.matrix.CreateFrameCanvas()
