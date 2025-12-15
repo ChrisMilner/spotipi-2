@@ -15,6 +15,7 @@ class LEDMatrix:
         options.drop_privileges = False
 
         self.matrix = RGBMatrix(options=options)
+        self.frame = None
 
     def display_image(self, image):
         self.matrix.SetImage(image)
@@ -26,4 +27,9 @@ class LEDMatrix:
         self.matrix.Clear()
 
     def create_blank_frame(self):
-        return self.matrix.CreateFrameCanvas()
+        if self.frame == None:
+            self.frame = self.matrix.CreateFrameCanvas()
+
+        self.frame.Clear()
+
+        return self.frame
